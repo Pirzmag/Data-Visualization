@@ -18,21 +18,21 @@ class RandomWalk:
         # Keep taking steps until the walk reaches the desired length
         while len(self.x_values) < self.num_points:
 
-            # Decide which direction to go and how far in that direction
-            x_direction = choice([1, -1])
-            x_distance = choice([0, 1, 2, 3, 4])
-            x_step = x_direction * x_distance
-
-            y_direction = choice([1, -1])
-            y_distance = choice([0, 1, 2, 3, 4])
-            y_step = y_direction * y_distance
-
-            if x_step == 0 and y_step == 0:
-                continue
-
             # Calculate the new position
-            x = self.x_values[-1] + x_step
-            y = self.y_values[-1] + y_step
+            x = self.x_values[-1] + self.get_step()
+            y = self.y_values[-1] + self.get_step()
+
+            if x == self.x_values[-1] and y == self.y_values[-1]:
+                continue
 
             self.x_values.append(x)
             self.y_values.append(y)
+
+    def get_step(self):
+        """Generate a step"""
+
+        # Decide which direction and how far
+        step_direction = choice([1, -1])
+        step_distance = choice([0, 1, 2, 3, 4])
+        step = step_direction * step_distance
+        return step
